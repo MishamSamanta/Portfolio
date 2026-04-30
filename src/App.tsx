@@ -11,8 +11,6 @@ import {
   Mail, 
   ExternalLink, 
   Code, 
-  Menu, 
-  X, 
   Terminal, 
   Database, 
   Layout, 
@@ -22,74 +20,23 @@ import {
   Trophy,
   Hammer
 } from 'lucide-react';
+import PillNav from './components/PillNav';
+import SplitText from './components/SplitText';
+
+// --- Data ---
+const navItems = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Recognition', href: '#achievements' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const logo = "https://ui-avatars.com/api/?name=M&background=000&color=fff&rounded=true";
 
 // --- Components ---
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Achievements', href: '#achievements' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
-  return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md border-b border-zinc-100 py-4' : 'bg-transparent py-8'}`}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        <a href="#home" className="text-[11px] font-black tracking-[0.2em] uppercase text-zinc-950">
-          Misham / 2024
-        </a>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex gap-8">
-          {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className="nav-link">
-              {link.name}
-            </a>
-          ))}
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button className="md:hidden text-zinc-950" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile Nav Overlay */}
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute top-full left-0 w-full bg-white border-b border-zinc-200 p-6 flex flex-col gap-4 md:hidden"
-        >
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              className="text-lg font-medium text-zinc-600 active:text-zinc-950"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
-            </a>
-          ))}
-        </motion.div>
-      )}
-    </nav>
-  );
-};
 
 const Hero = () => (
   <section id="home" className="min-h-screen flex flex-col justify-center section-padding pt-40">
@@ -101,7 +48,11 @@ const Hero = () => (
     >
       <div className="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-400 mb-8">Creative Developer</div>
       <h1 className="mb-8">
-        Misham
+        <SplitText 
+          text="Misham" 
+          delay={100} 
+          className="text-[90px] md:text-[140px] leading-[0.85] font-black tracking-tighter uppercase"
+        />
       </h1>
       <p className="text-xl font-medium text-zinc-500 mb-12 max-w-xl italic leading-relaxed">
         "Full Stack Developer — I build clean, functional web experiences with a focus on minimalist aesthetics."
@@ -368,7 +319,14 @@ const Footer = () => (
 export default function App() {
   return (
     <div className="bg-zinc-50 min-h-screen">
-      <Navbar />
+      <PillNav 
+        logo={logo} 
+        items={navItems} 
+        baseColor="#000" 
+        pillColor="#fff"
+        pillTextColor="#000"
+        hoveredPillTextColor="#fff"
+      />
       <main>
         <Hero />
         <About />
