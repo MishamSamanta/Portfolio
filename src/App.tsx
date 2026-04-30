@@ -50,7 +50,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md border-b border-zinc-100 py-4' : 'bg-transparent py-8'}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
         <a href="#home" className="text-[11px] font-black tracking-[0.2em] uppercase text-zinc-950">
-          Portfolio / 2024
+          Misham / 2024
         </a>
 
         {/* Desktop Nav */}
@@ -101,10 +101,10 @@ const Hero = () => (
     >
       <div className="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-400 mb-8">Creative Developer</div>
       <h1 className="mb-8">
-        [Your Name]
+        Misham
       </h1>
       <p className="text-xl font-medium text-zinc-500 mb-12 max-w-xl italic leading-relaxed">
-        "[Your Professional Title] — I build clean, functional web experiences with a focus on minimalist aesthetics."
+        "Full Stack Developer — I build clean, functional web experiences with a focus on minimalist aesthetics."
       </p>
       <a href="#projects" className="btn-bold group">
         View Projects
@@ -354,7 +354,7 @@ const Footer = () => (
   <footer className="py-12 border-t border-zinc-100">
     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
       <div className="text-[10px] font-black uppercase text-zinc-400 tracking-[0.2em]">
-        © {new Date().getFullYear()} [Your Name]
+        © {new Date().getFullYear()} Misham
       </div>
       <div className="flex gap-8">
         <a href="#" className="text-[9px] font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950">Github</a>
