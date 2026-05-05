@@ -171,8 +171,8 @@ const Projects = () => {
 const Achievements = () => {
   const achievements = [
     {
-      title: "Dean's List",
-      date: "2024",
+      title: "Academics",
+      date: "2026",
       desc: "Academic excellence award."
     },
     {
@@ -181,9 +181,10 @@ const Achievements = () => {
       desc: "First place at Global Tech Jam."
     },
     {
-      title: "AWS Certified",
-      date: "2024",
-      desc: "Cloud Practitioner certification."
+      title: "FED KIIT Society",
+      date: "2026",
+      desc: "Working at FED KIIT, contributing to technical projects and community growth.",
+      link: "https://www.fedkiit.com/"
     },
   ];
 
@@ -195,7 +196,15 @@ const Achievements = () => {
           {achievements.map((item, idx) => (
             <div key={idx} className="group">
               <div className="text-[10px] font-black text-zinc-600 mb-4 tracking-[0.2em]">{item.date}</div>
-              <h3 className="text-lg font-black uppercase mb-3 leading-tight group-hover:text-amber-200 transition-colors">{item.title}</h3>
+              {item.link ? (
+                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block hover:translate-x-1 transition-transform">
+                  <h3 className="text-lg font-black uppercase mb-3 leading-tight group-hover:text-amber-200 transition-colors flex items-center gap-2">
+                    {item.title} <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </h3>
+                </a>
+              ) : (
+                <h3 className="text-lg font-black uppercase mb-3 leading-tight group-hover:text-amber-200 transition-colors">{item.title}</h3>
+              )}
               <p className="text-zinc-400 text-xs font-medium leading-relaxed">
                 {item.desc}
               </p>
@@ -219,11 +228,11 @@ const Skills = () => {
     },
     {
       title: "Tools",
-      skills: ["Git", "VS Code", "Figma"],
+      skills: ["Git", "VS Code", "Figma", "Premiere Pro"],
     },
     {
       title: "Soft Skills",
-      skills: ["Communication", "Strategy", "Collaboration"],
+      skills: ["Video Editor", "Photographer", "Artist", "Communication"],
     },
   ];
 
@@ -259,22 +268,22 @@ const Contact = () => (
         <p className="text-zinc-500 mb-12 text-lg font-medium italic">"Every great project starts with a conversation."</p>
         
         <div className="space-y-8">
-          <a href="mailto:example@email.com" className="group flex items-center gap-6">
+          <a href="mailto:misham.samanta@gmail.com" className="group flex items-center gap-6">
             <div className="w-12 h-12 flex items-center justify-center bg-zinc-100 text-zinc-400 group-hover:bg-zinc-950 group-hover:text-white transition-all">
               <Mail size={18} />
             </div>
             <div>
               <div className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Email</div>
-              <div className="text-sm font-bold">example@email.com</div>
+              <div className="text-sm font-bold">misham.samanta@gmail.com</div>
             </div>
           </a>
-          <a href="#" className="group flex items-center gap-6">
+          <a href="https://www.linkedin.com/in/misham-samanta-33b838224/" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-6">
             <div className="w-12 h-12 flex items-center justify-center bg-zinc-100 text-zinc-400 group-hover:bg-zinc-950 group-hover:text-white transition-all">
               <Linkedin size={18} />
             </div>
             <div>
               <div className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">LinkedIn</div>
-              <div className="text-sm font-bold">@yourusername</div>
+              <div className="text-sm font-bold">@misham-samanta</div>
             </div>
           </a>
         </div>
@@ -308,8 +317,8 @@ const Footer = () => (
         © {new Date().getFullYear()} Misham
       </div>
       <div className="flex gap-8">
-        <a href="#" className="text-[9px] font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950">Github</a>
-        <a href="#" className="text-[9px] font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950">Linktree</a>
+        <a href="https://github.com/misham-samanta" target="_blank" rel="noopener noreferrer" className="text-[9px] font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950">Github</a>
+        <a href="https://www.linkedin.com/in/misham-samanta-33b838224/" target="_blank" rel="noopener noreferrer" className="text-[9px] font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950">LinkedIn</a>
         <a href="#" className="text-[9px] font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950">Resume</a>
       </div>
     </div>
