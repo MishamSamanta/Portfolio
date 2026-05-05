@@ -84,20 +84,24 @@ const About = () => (
       <div className="md:col-span-7">
         <h2 className="">Timeline / Education</h2>
         <div className="space-y-12">
-          <div className="flex gap-12 group">
-            <div className="text-[11px] font-black text-zinc-950 w-20 pt-1 tracking-widest">2020 — 2024</div>
+          <a href="https://maps.app.goo.gl/4bYma1Z4nyrEgwx28" target="_blank" rel="noopener noreferrer" className="flex gap-12 group">
+            <div className="text-[11px] font-black text-zinc-950 w-20 pt-1 tracking-widest">2025 — 2029</div>
             <div>
-              <h4 className="text-sm font-black uppercase mb-1">Bachelor of Computer Science</h4>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest">University Name • Academic Honors</p>
+              <h4 className="text-sm font-black uppercase mb-1 flex items-center gap-2">
+                B.Tech in Computer Science <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+              </h4>
+              <p className="text-xs text-zinc-500 uppercase tracking-widest">KIIT University • First Year Student</p>
             </div>
-          </div>
-          <div className="flex gap-12 group opacity-50 hover:opacity-100 transition-opacity">
-            <div className="text-[11px] font-black text-zinc-950 w-20 pt-1 tracking-widest">2018 — 2020</div>
+          </a>
+          <a href="https://maps.app.goo.gl/65qehiDw8u2BXzWv5" target="_blank" rel="noopener noreferrer" className="flex gap-12 group opacity-50 hover:opacity-100 transition-opacity">
+            <div className="text-[11px] font-black text-zinc-950 w-20 pt-1 tracking-widest">2024 — 2025</div>
             <div>
-              <h4 className="text-sm font-black uppercase mb-1">High School Diploma</h4>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest">School Name • General Excellence</p>
+              <h4 className="text-sm font-black uppercase mb-1 flex items-center gap-2">
+                Jusco School Kadma <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+              </h4>
+              <p className="text-xs text-zinc-500 uppercase tracking-widest">High School • Jamshedpur</p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -327,7 +331,10 @@ const Footer = () => (
 
 export default function App() {
   return (
-    <div className="bg-zinc-50 min-h-screen">
+    <div className="bg-zinc-50 min-h-screen relative overflow-hidden">
+      {/* Background Decorative Element */}
+      <div className="fixed bottom-0 right-0 w-[600px] h-[600px] bg-zinc-200/50 blur-[150px] rounded-full pointer-events-none -mr-64 -mb-64 z-0" />
+      
       <PillNav 
         logo={logo} 
         items={navItems} 
