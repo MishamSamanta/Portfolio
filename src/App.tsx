@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { 
   Github, 
@@ -20,8 +20,6 @@ import {
   Trophy,
   Hammer
 } from 'lucide-react';
-import PillNav from './components/PillNav';
-import SplitText from './components/SplitText';
 
 // --- Data ---
 const navItems = [
@@ -38,318 +36,411 @@ const logo = "https://ui-avatars.com/api/?name=M&background=000&color=fff&rounde
 // --- Components ---
 
 
-const Hero = () => (
-  <section id="home" className="min-h-screen flex flex-col justify-center section-padding pt-40">
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="max-w-6xl"
-    >
-      <div className="text-[10px] font-bold uppercase tracking-[0.5em] text-zinc-400 mb-8">Creative Developer</div>
-      <h1 className="mb-8">
-        <SplitText 
-          text="Misham" 
-          delay={100} 
-          className="text-[90px] md:text-[140px] leading-[0.85] font-black tracking-tighter uppercase"
-        />
-      </h1>
-      <p className="text-xl font-medium text-zinc-500 mb-12 max-w-xl italic leading-relaxed">
-        "Full Stack Developer — I build clean, functional web experiences with a focus on minimalist aesthetics."
-      </p>
-      <a href="#projects" className="btn-bold group">
-        View Projects
-      </a>
-    </motion.div>
-  </section>
+const Header = () => (
+  <header id="main-nav" className="fixed top-0 left-0 w-full h-[60px] border-b-[1.5px] border-ink bg-bg/80 backdrop-blur-sm z-50 px-6 md:px-12 flex items-center justify-between opacity-0 -translate-y-full transition-all duration-700 ease-out delay-100">
+    <div className="text-xs font-bold uppercase tracking-widest cursor-default">
+      misham.dzn
+    </div>
+    
+    <nav className="hidden md:flex gap-6 items-center">
+      {['Works', 'About', 'Contact'].map((item) => (
+        <a 
+          key={item} 
+          href={`#${item.toLowerCase()}`}
+          className="nav-link"
+        >
+          ({item})
+        </a>
+      ))}
+    </nav>
+    
+    <div className="badge-status">
+      <span>✳</span> OPEN TO WORK
+    </div>
+  </header>
 );
 
-const About = () => (
-  <section id="about" className="section-padding bg-zinc-50 border-y border-zinc-100">
-    <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-16">
-      <div className="md:col-span-5">
-        <h2 className="">Introduction</h2>
-        <div className="space-y-6 text-zinc-600 leading-relaxed font-medium text-lg">
-          <p>
-            Hello! I'm a developer dedicated to crafting intuitive digital solutions. 
-            I believe that great software is built at the intersection of robust functionality and elegant design.
-          </p>
-          <p>
-            With a focus on modern web technologies, I enjoy tackling complex problems and turning them into 
-            seamless user experiences. 
-          </p>
-        </div>
+const Hero = () => (
+  <section id="home" className="pt-32 pb-16 px-6 md:px-12">
+    <div className="relative border-b-[1.5px] border-ink pb-12">
+      <div className="crosshair -top-1.5 -left-1.5">+</div>
+      <div className="crosshair -top-1.5 -right-1.5">+</div>
+      
+      <div className="hero-hover-area">
+        <h1 className="text-[14vw] leading-[0.85] tracking-[-0.04em] flex flex-wrap">
+          <span className="serif-italic font-normal hero-name-serif">Misham</span>&nbsp;
+          <span className="font-[800] hero-name-bold">Samanta</span>
+        </h1>
       </div>
       
-      <div className="md:col-span-7">
-        <h2 className="">Timeline / Education</h2>
-        <div className="space-y-12">
-          <a href="https://maps.app.goo.gl/4bYma1Z4nyrEgwx28" target="_blank" rel="noopener noreferrer" className="flex gap-12 group">
-            <div className="text-[11px] font-black text-zinc-950 w-20 pt-1 tracking-widest">2025 — 2029</div>
-            <div>
-              <h4 className="text-sm font-black uppercase mb-1 flex items-center gap-2">
-                B.Tech in Computer Science <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-              </h4>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest">KIIT University • First Year Student</p>
-            </div>
-          </a>
-          <a href="https://maps.app.goo.gl/65qehiDw8u2BXzWv5" target="_blank" rel="noopener noreferrer" className="flex gap-12 group opacity-50 hover:opacity-100 transition-opacity">
-            <div className="text-[11px] font-black text-zinc-950 w-20 pt-1 tracking-widest">2024 — 2025</div>
-            <div>
-              <h4 className="text-sm font-black uppercase mb-1 flex items-center gap-2">
-                Jusco School Kadma <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-              </h4>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest">High School • Jamshedpur</p>
-            </div>
-          </a>
+      <div className="mt-12 grid grid-cols-1 md:grid-cols-12 items-end gap-8 reveal-on-scroll">
+        <div className="md:col-span-4">
+          <p className="max-w-[280px]">
+            Developer dedicated to crafting <span className="serif-italic underline decoration-accent decoration-2 underline-offset-4">intuitive</span> digital solutions. 
+            Currently <span className="serif-italic underline decoration-accent decoration-2 underline-offset-4">exploring</span> clean, functional web experiences.
+          </p>
+        </div>
+        
+        <div className="md:col-span-4 flex justify-center">
+          <div className="image-reveal inline-block">
+            <img 
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600" 
+              alt="Work setup" 
+              className="w-full max-w-[320px] aspect-[4/5] object-cover border-[1.5px] border-ink"
+            />
+          </div>
+        </div>
+        
+        <div className="md:col-span-4 md:text-right">
+          <p className="label-eyebrow mb-4">Focus On</p>
+          <div className="text-sm font-medium space-y-1">
+            <p>Full Stack Development</p>
+            <p>UI Design · Interaction</p>
+            <p>Based in Jamshedpur</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 );
 
-const Projects = () => {
-  const projects = [
-    {
-      title: "Portfolio Website",
-      desc: "Designed with a focus on minimalism and accessibility.",
-      tags: ["HTML", "CSS", "JS"],
-      demo: "#",
-      source: "#",
-    },
-    {
-      title: "Task Manager App",
-      desc: "Real-time updates and intuitive task organization.",
-      tags: ["React", "Node.js"],
-      demo: "#",
-      source: "#",
-    },
-    {
-      title: "Weather Dashboard",
-      desc: "Weather visualization using modern web APIs.",
-      tags: ["JavaScript", "API"],
-      demo: "#",
-      source: "#",
-    },
-    {
-      title: "Blog Platform",
-      desc: "Markdown system with optimized reading experience.",
-      tags: ["Next.js", "MongoDB"],
-      demo: "#",
-      source: "#",
-    },
-  ];
-
-  return (
-    <section id="projects" className="section-padding">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="">Selected Works</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-          {projects.map((project, idx) => (
-            <div key={idx} className="border-link group">
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-black uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">{project.title}</h3>
-                <div className="flex gap-4">
-                  <a href={project.demo} className="text-[10px] font-bold uppercase hover:underline">Live</a>
-                  <a href={project.source} className="text-[10px] font-bold uppercase hover:underline italic text-zinc-400">Code</a>
-                </div>
-              </div>
-              <p className="text-zinc-500 text-sm mb-6 font-medium leading-relaxed">{project.desc}</p>
-              
-              <div className="flex flex-wrap gap-4">
-                {project.tags.map(tag => (
-                  <span key={tag} className="text-[9px] font-black uppercase tracking-[0.1em] text-zinc-300 group-hover:text-zinc-950 transition-colors">
-                    • {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Achievements = () => {
-  const achievements = [
-    {
-      title: "Academics",
-      date: "2026",
-      desc: "Academic excellence award."
-    },
-    {
-      title: "Hackathon Winner",
-      date: "2023",
-      desc: "First place at Global Tech Jam."
-    },
-    {
-      title: "FED KIIT Society",
-      date: "2026",
-      desc: "Working at FED KIIT, contributing to technical projects and community growth.",
-      link: "https://www.fedkiit.com/"
-    },
-  ];
-
-  return (
-    <section id="achievements" className="section-padding bg-zinc-950 text-white">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="!text-zinc-500">Recognition</h2>
-        <div className="grid md:grid-cols-3 gap-12">
-          {achievements.map((item, idx) => (
-            <div key={idx} className="group">
-              <div className="text-[10px] font-black text-zinc-600 mb-4 tracking-[0.2em]">{item.date}</div>
-              {item.link ? (
-                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block hover:translate-x-1 transition-transform">
-                  <h3 className="text-lg font-black uppercase mb-3 leading-tight group-hover:text-amber-200 transition-colors flex items-center gap-2">
-                    {item.title} <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </h3>
-                </a>
-              ) : (
-                <h3 className="text-lg font-black uppercase mb-3 leading-tight group-hover:text-amber-200 transition-colors">{item.title}</h3>
-              )}
-              <p className="text-zinc-400 text-xs font-medium leading-relaxed">
-                {item.desc}
+const About = () => (
+  <section id="about" className="section-padding reveal-on-scroll">
+    <SectionHeading outline="About" solid="ABOUT ME" />
+    <div className="grid md:grid-cols-12 gap-12 border-b-[1.5px] border-ink pb-24">
+      <div className="md:col-span-4">
+        <h2 className="label-eyebrow mb-12">Timeline / Education</h2>
+        <div className="space-y-16">
+          {['2025 — 2029', '2024 — 2025'].map((period, i) => (
+            <a 
+              key={i}
+              href={i === 0 ? "https://maps.app.goo.gl/4bYma1Z4nyrEgwx28" : "https://maps.app.goo.gl/65qehiDw8u2BXzWv5"} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="block group reveal-on-scroll"
+              style={{ transitionDelay: `${i * 0.1}s` }}
+            >
+              <div className="text-[11px] font-bold mb-2 opacity-50">{period}</div>
+              <h4 className="text-xl font-[800] uppercase mb-2 group-hover:text-accent transition-all underline underline-offset-4 decoration-accent decoration-0 group-hover:decoration-2">
+                {i === 0 ? 'B.Tech in CSE' : 'School Diploma'}
+              </h4>
+              <p className="text-sm opacity-60">
+                {i === 0 ? 'KIIT University · ' : 'Jusco School Kadma · '}
+                <span className="serif-italic">{i === 0 ? 'First Year' : 'Jamshedpur'}</span>
               </p>
-            </div>
+            </a>
           ))}
         </div>
+      </div>
+      
+      <div className="md:col-span-8 md:pl-24 reveal-on-scroll">
+        <h2 className="label-eyebrow mb-12">Personal Narrative</h2>
+        <div className="text-2xl md:text-4xl leading-[1.2] font-normal max-w-2xl">
+          I believe that great software is built at the intersection of <span className="serif-italic text-accent">robust functionality</span> and <span className="serif-italic text-accent">elegant design</span>. Focus on modern web technologies, tackling <span className="serif-italic underline decoration-accent decoration-2 underline-offset-[6px]">complex problems</span> and turning them into seamless user experiences.
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const MarqueeStrip = () => {
+  const items1 = [
+    "FULL STACK DEVELOPER",
+    "OPEN TO WORK",
+    "REACT · NODE.JS · PYTHON",
+    "BASED IN JAMSHEDPUR",
+    "AVAILABLE FOR FREELANCE",
+    "LET'S BUILD SOMETHING"
+  ];
+  
+  const items2 = [
+    "MISHAM.DZN",
+    "PORTFOLIO 2025",
+    "CREATIVE DEVELOPER",
+    "UI · UX · CODE",
+    "AVAILABLE NOW"
+  ];
+
+  const renderGroup = (items: string[], textColor: string, key: any) => (
+    <div key={key} className={`marquee-text ${textColor}`}>
+      {items.map((item, i) => (
+        <React.Fragment key={i}>
+          <span>{item}</span>
+          <span className="marquee-sep">✳</span>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+
+  return (
+    <div className="py-[60px] reveal-on-scroll">
+      <div className="bg-ink marquee-strip border-y-[1.5px] border-ink">
+        <div className="marquee-inner">
+          {[...Array(6)].map((_, i) => renderGroup(items1, "text-bg", i))}
+        </div>
+      </div>
+      <div className="bg-accent marquee-strip border-b-[1.5px] border-ink">
+        <div className="marquee-inner-reverse">
+          {[...Array(6)].map((_, i) => renderGroup(items2, "text-ink", i))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SectionHeading = ({ outline, solid }: { outline: string; solid: string }) => (
+  <div className="section-heading-wrap">
+    <span className="section-heading-outline">{outline}</span>
+    <span className="section-heading-solid">{solid}</span>
+  </div>
+);
+
+const Works = () => {
+  const projects = [
+    { title: "Portfolio Website", desc: "Designed with a focus on minimalism and accessibility.", tags: ["HTML", "CSS", "JS"] },
+    { title: "Task Manager App", desc: "Real-time updates and intuitive task organization.", tags: ["React", "Node.js"] },
+    { title: "Weather Dashboard", desc: "Weather visualization using modern web APIs.", tags: ["JavaScript", "API"] },
+    { title: "Blog Platform", desc: "Markdown system with optimized reading experience.", tags: ["Next.js", "MongoDB"] },
+  ];
+
+  return (
+    <section id="works" className="section-padding reveal-on-scroll">
+      <SectionHeading outline="Projects" solid="WORKS" />
+      <h2 className="label-eyebrow mb-16">Selected Works</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-16">
+        {projects.map((project, idx) => (
+          <div key={idx} className="group relative brutal-card p-10 reveal-on-scroll" style={{ transitionDelay: `${idx * 0.1}s` }}>
+            <div className="crosshair -top-1.5 -left-1.5 opacity-0 group-hover:opacity-100 transition-opacity">+</div>
+            <div className="flex justify-between items-end border-b-[1.5px] border-ink pb-4 mb-4">
+              <h3 className="text-3xl font-[800] uppercase tracking-tighter transition-all group-hover:text-accent">{project.title}</h3>
+              <div className="flex gap-4 mb-1">
+                <a href="#" className="text-[11px] font-bold uppercase border-b-[1.5px] border-ink hover:text-accent transition-colors">Link</a>
+              </div>
+            </div>
+            <p className="text-sm max-w-sm mb-6 opacity-60 leading-relaxed">{project.desc}</p>
+            <div className="flex gap-6">
+              {project.tags.map(tag => (
+                <span key={tag} className="text-[10px] font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">({tag})</span>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
 };
 
-const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Frontend",
-      skills: ["HTML5", "CSS3", "JavaScript", "React"],
-    },
-    {
-      title: "Backend",
-      skills: ["Node.js", "Python", "SQL"],
-    },
-    {
-      title: "Tools",
-      skills: ["Git", "VS Code", "Figma", "Premiere Pro"],
-    },
-    {
-      title: "Soft Skills",
-      skills: ["Video Editor", "Photographer", "Artist", "Communication"],
-    },
+const Capabilities = () => {
+  const categories = [
+    { title: "FRONTEND", skills: ["HTML5", "CSS3", "JavaScript", "React"] },
+    { title: "BACKEND", skills: ["Node.js", "Python", "SQL"] },
+    { title: "TOOLS", skills: ["Git", "VS Code", "Figma", "Premiere"] },
+    { title: "SOFT SKILLS", skills: ["Video Editor", "Art", "Camera", "Strategy"] },
   ];
 
   return (
-    <section id="skills" className="section-padding">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="">Capabilities</h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-16">
-          {skillCategories.map((category, idx) => (
-            <div key={idx}>
-              <h3 className="text-[11px] font-black uppercase tracking-widest text-zinc-950 mb-6 border-b border-zinc-200 pb-2">{category.title}</h3>
-              <ul className="space-y-3">
-                {category.skills.map(skill => (
-                  <li key={skill} className="text-xs font-medium text-zinc-500 hover:text-zinc-950 transition-colors">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
+    <section id="skills" className="border-t-[1.5px] border-ink pt-24 reveal-on-scroll">
+      <SectionHeading outline="Skills" solid="EXPERTISE" />
+      <div className="skills-grid">
+        {categories.map((cat, idx) => (
+          <div key={idx} className="skill-category reveal-on-scroll" style={{ transitionDelay: `${idx * 0.1}s` }}>
+            <h3 className="text-[11px] font-bold uppercase tracking-widest mb-4 italic text-accent opacity-100">({cat.title})</h3>
+            <div className="flex flex-col gap-3">
+              {cat.skills.map(s => (
+                <span key={s} className="skill-item">{s}</span>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   );
 };
 
 const Contact = () => (
-  <section id="contact" className="section-padding border-t border-zinc-100">
-    <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-24">
-      <div>
-        <h2 className="">Get In Touch</h2>
-        <p className="text-zinc-500 mb-12 text-lg font-medium italic">"Every great project starts with a conversation."</p>
-        
-        <div className="space-y-8">
-          <a href="mailto:misham.samanta@gmail.com" className="group flex items-center gap-6">
-            <div className="w-12 h-12 flex items-center justify-center bg-zinc-100 text-zinc-400 group-hover:bg-zinc-950 group-hover:text-white transition-all">
-              <Mail size={18} />
-            </div>
-            <div>
-              <div className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Email</div>
-              <div className="text-sm font-bold">misham.samanta@gmail.com</div>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/misham-samanta-33b838224/" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-6">
-            <div className="w-12 h-12 flex items-center justify-center bg-zinc-100 text-zinc-400 group-hover:bg-zinc-950 group-hover:text-white transition-all">
-              <Linkedin size={18} />
-            </div>
-            <div>
-              <div className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">LinkedIn</div>
-              <div className="text-sm font-bold">@misham-samanta</div>
-            </div>
-          </a>
+  <section id="contact" className="section-padding border-t-[1.5px] border-ink reveal-on-scroll">
+    <SectionHeading outline="Contact" solid="GET IN TOUCH" />
+    <div className="grid md:grid-cols-12 gap-12">
+      <div className="md:col-span-5">
+        <h2 className="label-eyebrow mb-16">Contact</h2>
+        <div className="text-4xl md:text-6xl font-[800] uppercase tracking-tighter mb-12">
+          Let's Start a <span className="serif-italic font-normal underline decoration-accent decoration-4 underline-offset-8">Conversation</span>
+        </div>
+        <div className="space-y-6">
+          <a href="mailto:misham.samanta@gmail.com" className="block text-2xl font-bold hover:text-accent transition-all">misham.samanta@gmail.com</a>
+          <div className="flex gap-8">
+            <a href="https://www.linkedin.com/in/misham-samanta-33b838224/" target="_blank" rel="noopener noreferrer" className="label-eyebrow opacity-100 hover:text-accent transition-colors">LinkedIn</a>
+            <a href="https://github.com/misham-samanta" target="_blank" rel="noopener noreferrer" className="label-eyebrow opacity-100 hover:text-accent transition-colors">Github</a>
+          </div>
         </div>
       </div>
-
-      <form className="space-y-4" onSubmit={e => e.preventDefault()}>
-        <div>
-          <label className="label-text">Your Name</label>
-          <input type="text" placeholder="Alex Rivers" className="input-field" />
+      <div className="md:col-span-7 md:flex items-end justify-end">
+        <div className="text-right max-w-sm">
+          <p className="opacity-60 mb-8 italic text-lg leading-relaxed">
+            Every great project begins with an <span className="serif-italic underline decoration-accent decoration-2 underline-offset-4">exploratory</span> dialogue about goals and possibilities.
+          </p>
+          <div className="h-[1.5px] w-full bg-ink mb-8" />
+          <div className="flex justify-between label-eyebrow opacity-100">
+            <span>BASED IN INDIA</span>
+            <span>GMT+5:30</span>
+          </div>
         </div>
-        <div>
-          <label className="label-text">Email Address</label>
-          <input type="email" placeholder="alex@example.com" className="input-field" />
-        </div>
-        <div>
-          <label className="label-text">Message</label>
-          <textarea rows={4} placeholder="Tell me about your project" className="input-field resize-none" />
-        </div>
-        <button type="submit" className="btn-bold w-full mt-4">
-          Send Message
-        </button>
-      </form>
+      </div>
     </div>
   </section>
 );
 
 const Footer = () => (
-  <footer className="py-12 border-t border-zinc-100">
-    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div className="text-[10px] font-black uppercase text-zinc-400 tracking-[0.2em]">
-        © {new Date().getFullYear()} Misham
-      </div>
-      <div className="flex gap-8">
-        <a href="https://github.com/misham-samanta" target="_blank" rel="noopener noreferrer" className="text-[9px] font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950">Github</a>
-        <a href="https://www.linkedin.com/in/misham-samanta-33b838224/" target="_blank" rel="noopener noreferrer" className="text-[9px] font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950">LinkedIn</a>
-        <a href="#" className="text-[9px] font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950">Resume</a>
-      </div>
+  <footer className="py-12 px-6 md:px-12 border-t-[1.5px] border-ink flex flex-col md:flex-row justify-between items-center gap-8">
+    <div className="label-eyebrow opacity-100">
+      © {new Date().getFullYear()} MISHAM SAMANTA
+    </div>
+    <div className="flex gap-12">
+      {['Github', 'LinkedIn', 'Resume'].map(item => (
+        <a 
+          key={item} 
+          href={item === 'LinkedIn' ? "https://www.linkedin.com/in/misham-samanta-33b838224/" : item === 'Github' ? "https://github.com/misham-samanta" : "#"} 
+          className="text-[11px] font-[800] uppercase tracking-widest hover:text-accent transition-colors"
+        >
+          {item}
+        </a>
+      ))}
     </div>
   </footer>
 );
 
 export default function App() {
-  return (
-    <div className="bg-zinc-50 min-h-screen relative overflow-hidden">
-      {/* Background Decorative Element */}
-      <div className="fixed bottom-0 right-0 w-[600px] h-[600px] bg-zinc-200/50 blur-[150px] rounded-full pointer-events-none -mr-64 -mb-64 z-0" />
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+
+  useEffect(() => {
+    // 1. Initial Load Animations
+    setTimeout(() => {
+      document.querySelector('#main-nav')?.classList.remove('opacity-0', '-translate-y-full');
+      document.querySelector('.hero-name-serif')?.classList.add('active');
+      document.querySelector('.hero-name-bold')?.classList.add('active');
+    }, 100);
+
+    // 2. Intersection Observer for Scroll reveal
+    const observerOptions = {
+      threshold: 0.15,
+      once: true
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          if (entry.target.classList.contains('label-eyebrow')) {
+            entry.target.classList.add('reveal');
+          }
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll, .image-reveal, .label-eyebrow, .section-heading-wrap').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // 3. Scroll Progress & Background Shift
+    const handleScroll = () => {
+      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      const progress = document.getElementById('scroll-progress');
+      if (progress) progress.style.width = `${scrolled}%`;
+
+      if (scrolled > 60) {
+        document.body.classList.add('bg-darker');
+      } else {
+        document.body.classList.remove('bg-darker');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // 4. Custom Cursor Logic
+    const handleMouseMove = (e: MouseEvent) => {
+      positionRef.current = { x: e.clientX, y: e.clientY };
+    };
+
+    let rafId: number;
+    const updateCursorPosition = () => {
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${positionRef.current.x}px, ${positionRef.current.y}px, 0)`;
+      }
+      rafId = requestAnimationFrame(updateCursorPosition);
+    };
+
+    const handleInteraction = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
       
-      <PillNav 
-        logo={logo} 
-        items={navItems} 
-        baseColor="#000" 
-        pillColor="#fff"
-        pillTextColor="#000"
-        hoveredPillTextColor="#fff"
-      />
+      if (target.closest('a, button, [role="button"], .brutal-card')) {
+        cursorRef.current?.classList.add('hovering');
+      } else {
+        cursorRef.current?.classList.remove('hovering');
+      }
+
+      if (target.closest('.hero-hover-area')) {
+        cursorRef.current?.classList.add('hero-hover');
+      } else {
+        cursorRef.current?.classList.remove('hero-hover');
+      }
+    };
+
+    if (window.innerWidth > 768) {
+      window.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseover', handleInteraction);
+      cursorRef.current?.classList.add('visible');
+      rafId = requestAnimationFrame(updateCursorPosition);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseover', handleInteraction);
+      cancelAnimationFrame(rafId);
+      revealObserver.disconnect();
+    };
+  }, []);
+
+  const createRipple = (e: React.MouseEvent) => {
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    ripple.style.left = `${e.clientX}px`;
+    ripple.style.top = `${e.clientY}px`;
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 400);
+  };
+
+  return (
+    <div className="bg-bg min-h-screen text-ink relative overflow-hidden" onMouseDown={createRipple}>
+      <div id="scroll-progress" />
+      
+      <div ref={cursorRef} className="custom-cursor hidden md:block">
+        <div className="cursor-main">
+          <div className="cursor-dot-inner" />
+        </div>
+      </div>
+      
+      <div className="layout-grid" />
+      <div className="crosshair top-[60px] left-[20%]">+</div>
+      <div className="crosshair top-[60px] left-[40%]">+</div>
+      <div className="crosshair top-[60px] left-[60%]">+</div>
+      <div className="crosshair top-[60px] left-[80%]">+</div>
+
+      <Header />
       <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Achievements />
-        <Skills />
-        <Contact />
+        <div className="max-w-[1600px] mx-auto">
+          <Hero />
+          <About />
+        </div>
+        <MarqueeStrip />
+        <div className="max-w-[1600px] mx-auto">
+          <Works />
+          <Capabilities />
+          <Contact />
+        </div>
       </main>
       <Footer />
     </div>
