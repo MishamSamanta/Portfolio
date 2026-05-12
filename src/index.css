@@ -16,7 +16,6 @@
   }
 
   * {
-    @apply border-line;
     border-radius: 0 !important;
   }
   
@@ -212,7 +211,7 @@
 
   /* Skills Section Upgrade */
   .skills-grid {
-    @apply grid grid-cols-2 md:grid-cols-4 gap-8 px-[5%] py-20;
+    @apply grid grid-cols-2 md:grid-cols-4 gap-8 py-20 pb-0 border-none;
   }
 
   .skill-category {
@@ -284,7 +283,7 @@
 
   /* Decorative Section Headings */
   .section-heading-wrap {
-    @apply relative w-full overflow-hidden mb-[60px] pointer-events-none select-none;
+    @apply relative w-full overflow-hidden mb-[40px] pointer-events-none select-none;
   }
 
   .section-heading-outline {
@@ -318,4 +317,5 @@
   body.bg-darker .section-heading-outline {
     -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.06);
   }
+
 }

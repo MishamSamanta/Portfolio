@@ -239,7 +239,7 @@ const Capabilities = () => {
   ];
 
   return (
-    <section id="skills" className="border-t-[1.5px] border-ink pt-24 reveal-on-scroll">
+    <section id="skills" className="section-padding reveal-on-scroll">
       <SectionHeading outline="Skills" solid="EXPERTISE" />
       <div className="skills-grid">
         {categories.map((cat, idx) => (
@@ -256,6 +256,7 @@ const Capabilities = () => {
     </section>
   );
 };
+
 
 const Contact = () => (
   <section id="contact" className="section-padding border-t-[1.5px] border-ink reveal-on-scroll">
